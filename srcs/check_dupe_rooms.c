@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 02:05:08 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 02:05:08 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 11:41:59 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_bool		check_dupe_rooms(t_lst *rooms)
 		if (false == is_room(rooms->dat))
 		{
 			rooms = rooms->nxt;
+			if (beg == rooms)
+				break ;
 			continue ;
 		}
 		if (rooms != ft_lstfind(rooms->nxt, rooms->dat, strcmp_1word))

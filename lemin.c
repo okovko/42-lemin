@@ -88,15 +88,15 @@ int		main(void)
 	ft_lstadd(&test_lines, ft_lstnode("2", 0));
 	ft_lstadd(&test_lines, ft_lstnode("##end", 0));
 	ft_lstadd(&test_lines, ft_lstnode("3", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0-1", 0));
+	ft_lstadd(&test_lines, ft_lstnode("#0-1", 0));
 	ft_lstadd(&test_lines, ft_lstnode("0-2", 0));
-	//ft_lstadd(&test_lines, ft_lstnode("0-3", 0));
+	ft_lstadd(&test_lines, ft_lstnode("#0-3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-2", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("2-3", 0));
 	ft_lstsrev(&test_lines);
-	//lines = parse_lines();
 	lines = test_lines;
+	//lines = parse_lines();
 	if (false == check_lines(lines))
 		exit(EXIT_FAILURE);
 	in = process_input(lines);

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 03:33:47 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 09:45:59 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 11:42:26 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_bool		check_dupe_links(t_lst *links)
 		if (false == is_link(links->dat))
 		{
 			links = links->nxt;
+			if (beg == links)
+				break ;
 			continue ;
 		}
 		if (links != ft_lstfind(links->nxt, links->dat, strcmp_strict))
