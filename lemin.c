@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 23:51:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 09:28:48 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 10:01:37 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		get_path_r(t_farm *farm, t_room *room, t_lst **path, int depth)
 	ii = 0;
 	while (ii < room->sz)
 	{
-		room = get_room(farm, room->links[ii]);
-		if (1 == get_path_r(farm, room, path, depth - 1))
+		if (1 == get_path_r(farm, get_room(farm,
+											room->links[ii]), path, depth - 1))
 		{
 			ft_lstadd(path, ft_lstnode(room->id, ft_strlen(room->id)));
 			return (1);
@@ -61,7 +61,7 @@ t_lst	*get_path(t_farm *farm)
 	t_lst	*path;
 
 	path = NULL;
-	depth = 0;
+	depth = 2;
 	while (depth < 1000000)
 	{
 		if (1 == get_path_r(farm, farm->start, &path, depth))
@@ -90,7 +90,7 @@ int		main(void)
 	ft_lstadd(&test_lines, ft_lstnode("3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("0-1", 0));
 	ft_lstadd(&test_lines, ft_lstnode("0-2", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0-3", 0));
+	//ft_lstadd(&test_lines, ft_lstnode("0-3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-2", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("2-3", 0));
