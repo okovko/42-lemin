@@ -13,7 +13,13 @@
 #include "libft.h"
 #include "lemin.h"
 
-void	parse(void)
+t_lst	*parse_lines(void)
 {
-	return ;
+	char	*ss;
+	t_lst	*lines;
+
+	lines = NULL;
+	while (get_next_line(0, &ss) > 0)
+		lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
+	return (ft_lstsrev(&lines));
 }
