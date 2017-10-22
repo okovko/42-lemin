@@ -13,6 +13,13 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 
-#include "libft.h"
+# include "libft.h"
+
+t_lst	*parse_lines(void);
+t_bool	parse_checked_input(t_lst **lines);
+t_bool	check_input(t_lst *lines);
+t_bool	check_rooms(t_lst *lines);
+t_bool	check_ants(t_lst *lines);
+t_bool	has_solution(t_lst *lines, type **solution);
 
 #endif
