@@ -15,11 +15,19 @@
 
 # include "libft.h"
 
+typedef struct		s_farm
+{
+	int				id;
+	int				sz;
+	struct s_farm	links[];
+}					t_farm;
+
 t_lst	*parse_lines(void);
 t_bool	parse_checked_input(t_lst **lines);
 t_bool	check_input(t_lst *lines);
 t_bool	check_rooms(t_lst *lines);
 t_bool	check_ants(t_lst *lines);
+t_bool	is_room(char *ss);
 t_bool	has_solution(t_lst *lines, type **solution);
 
 #endif
