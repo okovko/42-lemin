@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 01:50:20 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 01:50:20 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 09:51:35 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ t_farm		*process_farm(t_input *in)
 	farm->ants = ft_atoi(in->ants->dat);
 	sz = count_rooms(in->rooms);
 	farm->sz = sz;
+	farm->rooms = ft_walloc(sizeof(t_room) * sz);
 	ii = 0;
 	while (ii < sz)
 	{
+		while (true == is_pound(in->rooms->dat))
+			in->rooms = in->rooms->nxt;
 		farm->rooms[ii] = add_room(in);
-		if (0 == ft_strcmp(start->dat, farm->rooms[ii]->id))
+		if (0 == ft_strcmp(start->dat, in->rooms->dat))
 			farm->start = farm->rooms[ii];
-		if (0 == ft_strcmp(end->dat, farm->rooms[ii]->id))
+		if (0 == ft_strcmp(end->dat, in->rooms->dat))
 			farm->end = farm->rooms[ii];
+		in->rooms = in->rooms->nxt;
 		ii++;
 	}
 	return (farm);

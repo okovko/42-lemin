@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 23:51:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 00:02:44 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 09:28:48 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,19 @@ int		main(void)
 	t_lst	*path;
 	
 	test_lines = NULL;
-	ft_lstadd(&test_lines, ft_lstnode("1\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("##start\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("1\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("2\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("##end\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("3\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0-1\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0-2\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("0-3\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("1-2\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("1-3\n", 0));
-	ft_lstadd(&test_lines, ft_lstnode("2-3\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1", 0));
+	ft_lstadd(&test_lines, ft_lstnode("##start", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1", 0));
+	ft_lstadd(&test_lines, ft_lstnode("2", 0));
+	ft_lstadd(&test_lines, ft_lstnode("##end", 0));
+	ft_lstadd(&test_lines, ft_lstnode("3", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-1", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-2", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-3", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1-2", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1-3", 0));
+	ft_lstadd(&test_lines, ft_lstnode("2-3", 0));
 	ft_lstsrev(&test_lines);
 	//lines = parse_lines();
 	lines = test_lines;
