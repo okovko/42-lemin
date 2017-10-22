@@ -71,14 +71,32 @@ t_lst	*get_path(t_farm *farm)
 	return (NULL);
 }
 
+
 int		main(void)
 {
+	t_lst	*test_lines;
 	t_lst	*lines;
 	t_input	*in;
 	t_farm	*farm;
 	t_lst	*path;
 	
-	lines = parse_lines();
+	test_lines = NULL;
+	ft_lstadd(&test_lines, ft_lstnode("1\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("##start\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("2\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("##end\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("3\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-1\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-2\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("0-3\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1-2\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("1-3\n", 0));
+	ft_lstadd(&test_lines, ft_lstnode("2-3\n", 0));
+	ft_lstsrev(&test_lines);
+	//lines = parse_lines();
+	lines = test_lines;
 	if (false == check_lines(lines))
 		exit(EXIT_FAILURE);
 	in = process_input(lines);

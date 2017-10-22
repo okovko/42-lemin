@@ -20,6 +20,10 @@ t_lst	*parse_lines(void)
 
 	lines = NULL;
 	while (get_next_line(0, &ss) > 0)
+	{
+		ft_putstr(ss);
+		ft_putstr("\n");
 		lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
+	}
 	return (ft_lstsrev(&lines));
 }
