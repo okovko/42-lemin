@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "lemin.h"
 
-static t_bool	is_room(char *ss)
+t_bool	is_room(char *ss)
 {
 	if ('\0' == *ss || NULL == ss)
 		return (false);
@@ -36,7 +36,7 @@ static t_bool	is_room(char *ss)
 	return (true);
 }
 
-t_bool			check_rooms(t_lst *lines)
+t_bool	check_rooms(t_lst *lines)
 {
 	t_lst	*start;
 	t_lst	*end;
