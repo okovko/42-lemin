@@ -104,6 +104,9 @@ int		main(void)
 		exit(EXIT_FAILURE);
 	farm = process_farm(in);
 	path = get_path(farm);
-	move_ants(farm, path);
+	if (NULL == path)
+		ft_putstr("Error\n");
+	else
+		move_ants(farm, path);
 	exit(EXIT_SUCCESS);
 }
