@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 00:46:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/06 15:53:58 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/22 01:00:46 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ t_lst		*ft_lstfind(t_lst *ll, void *qry,
 {
 	t_lst	*itr;
 
+	if (NULL == ll || NULL == qry || NULL == cmp)
+		return (NULL);
 	itr = ll;
-	while (NULL != itr)
+	while (true)
 	{
 		if (0 == cmp(qry, itr->dat, itr->sz))
 			return (itr);
 		itr = itr->nxt;
+		if (ll == itr)
+			break ;
 	}
 	return (NULL);
 }
