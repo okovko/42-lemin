@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_ants.c                                       :+:      :+:    :+:   */
+/*   check_start_end.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/22 01:38:16 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 01:38:16 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 04:47:01 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 04:47:01 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemin.h"
 
-t_bool	check_ants(t_lst *lines)
+t_bool	check_start_end(t_lst *lines)
 {
-	char	*ss;
+	t_lst	*start;
+	t_lst	*end;
 
-	if (NULL == lines)
+	start = ft_lstfind(lines, "##start", strcmp_strict);
+	end = ft_lstfind(lines, "##end", strcmp_strict);
+	if (NULL == start
+		|| NULL == end
+		|| start != ft_lstfind(start->nxt, start->dat, strcmp_strict)
+		|| end != ft_lstfind(end->nxt, end->dat, strcmp_strict))
 		return (false);
-	ss = lines->dat;
-	if (NULL == ss || !ISDIGIT(*ss))
-		return (false);
-	while (ISDIGIT(*ss))
-		ss++;
-	if ('\0' != *ss)
-		return (false);
-	return (true);
+	start = start->nxt;
+	end = end->nxt;
+	return (is_room(start->dat) && is_room(end->dat));
 }

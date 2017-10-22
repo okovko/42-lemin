@@ -10,11 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lemin
+NAME = lem-in
 
 SRCS = $(wildcard srcs/*.c)
 BINS = $(patsubst srcs/%.c, %.o, $(SRCS))
 FLAGS = -g -Wall -Wextra -Werror
+LIBFT = ./libft/libft.a
 
 .PHONY: re all clean fclean
 

@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_checked_input.c                              :+:      :+:    :+:   */
+/*   check_dupe_links.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/22 01:44:29 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 01:44:29 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 03:33:47 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 05:42:37 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemin.h"
 
-t_bool	parse_checked_input(t_lst **lines)
+t_bool		check_dupe_links(t_lst *links)
 {
-	*lines = parse_lines();
-	if (false == check_input(*lines))
+	t_lst	*beg;
+
+	beg = links;
+	while (true)
 	{
-		ft_lstnfree(lines, 1);
-		ft_putstr("Error\n");
-		return (false);
+		if (false == is_room(links->dat))
+		{
+			links = links->nxt;
+			continue ;
+		}
+		if (links != ft_lstfind(links->nxt, links->dat, strcmp_strict))
+			return (false);
+		links = links->nxt;
+		if (beg == links)
+			break ;
 	}
 	return (true);
 }

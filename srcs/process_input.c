@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 04:57:12 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 04:57:12 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "libft.h"
+#include "lemin.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+t_input		*process_input(t_lst *lines)
 {
-	const char	*beg;
+	t_lst		*beg;
+	t_input		*in;
 
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
-		ss++;
-	return (ss - beg);
+	beg = lines;
+	in = malloc(sizeof(*in));
+	in->ants = ft_lstpop(&lines);
+	while (is_room(lines->dat) || is_pound(lines->dat))
+		lines = lines->nxt;
+	if (beg == lines)
+	{
+		in->rooms = beg;
+		in->links = NULL;
+	}
+	ft_lstsplit(beg, lines);
+	in->rooms = beg;
+	in->links = lines;
+	return (in);
 }

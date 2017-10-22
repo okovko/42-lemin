@@ -171,7 +171,6 @@ t_lst				*ft_lstmerge(t_lst **into, t_lst **outof,
 t_lst				*ft_lstswp(t_lst **ll);
 t_bool				ft_lstp_any(t_lst *ll, t_bool (*pp)(t_lst *));
 t_bool				ft_lstp_each(t_lst *ll, t_bool (*pred)(t_lst *nod));
-t_bool				ft_lstp_uniq(t_lst *ll, int (*cmp)(t_lst *a, t_lst *b));
 t_bool				ft_lstp_sorted(t_lst *ll, int (*cmp)(t_lst *a, t_lst *b));
 t_bool				ft_lstp_rot_sorted(t_lst *ll,
 										int (*cmp)(t_lst *a, t_lst *b));
@@ -191,8 +190,8 @@ t_lst				*ft_lstnode(void const *dat, int sz);
 t_lst				*ft_lstnfree(t_lst **ll, int dpth);
 t_lst				*ft_lstdelcmp(t_lst **ll, void *qry,
 								int (*cmp)(const void *, const void *, int));
-t_lst				*ft_lstfind(t_lst *ll, void *qry,
-								int (*cmp)(void *, void *, int));
+t_lst				*ft_lstfind(t_lst *ll, char *qry,
+								int (*cmp)(char *, char *));
 t_lst				*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz);
 void				*ft_memcchr(const void *mm, int cc, int sz);
 char				*ft_strbuf(const char *buf, int sz);

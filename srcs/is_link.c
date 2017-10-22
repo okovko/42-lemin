@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   is_link.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 02:16:12 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 02:16:12 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "lemin.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+t_bool	is_link(char *ss)
 {
-	const char	*beg;
-
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
+	if (NULL == ss || !ISDIGIT(*ss))
+		return (false);
+	while (ISDIGIT(*ss))
 		ss++;
-	return (ss - beg);
+	if ('-' != *ss)
+		return (false);
+	ss++;
+	while (ISDIGIT(*ss))
+		ss++;
+	if ('\0' != *ss)
+		return (false);
+	return (true);
 }

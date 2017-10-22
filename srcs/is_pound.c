@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   is_pound.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/22 00:03:16 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 00:03:16 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 02:35:32 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 02:35:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemin.h"
 
-t_lst	*parse_lines(void)
+t_bool	is_pound(char *ss)
 {
-	char	*ss;
-	t_lst	*lines;
-
-	lines = NULL;
-	while (get_next_line(0, &ss) > 0)
-		lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
-	return (ft_lstsrev(&lines));
+	if (NULL == ss || '#' != *ss)
+		return (false);
+	return (true);
 }

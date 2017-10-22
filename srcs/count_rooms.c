@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstp_uniq.c                                     :+:      :+:    :+:   */
+/*   count_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/07 18:08:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/11 23:46:50 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 06:07:29 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 06:07:29 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "lemin.h"
 
-t_bool		ft_lstp_uniq(t_lst *outer, int (*cmp)(t_lst *a, t_lst *b))
+int		count_rooms(t_lst *rooms)
 {
-	t_lst		*beg;
-	t_lst		*inner;
+	int		ii;
+	t_lst	*beg;
 
-	if (NULL == outer || outer == outer->nxt)
-		return (true);
-	beg = outer;
+	beg = rooms;
+	ii = 0;
 	while (true)
 	{
-		inner = outer->nxt;
-		while (true)
-		{
-			if (0 == cmp(inner, outer))
-				return (false);
-			inner = inner->nxt;
-			if (outer == inner)
-				break ;
-		}
-		outer = outer->nxt;
-		if (beg == outer)
+		if (true == is_room(rooms->dat))
+			ii++;
+		rooms = rooms->nxt;
+		if (beg == rooms)
 			break ;
 	}
-	return (true);
+	return (ii);
 }

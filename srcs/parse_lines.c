@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   parse_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 00:03:16 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 03:37:08 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "lemin.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+t_lst	*parse_lines(void)
 {
-	const char	*beg;
+	char	*ss;
+	t_lst	*lines;
 
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
-		ss++;
-	return (ss - beg);
+	lines = NULL;
+	while (get_next_line(0, &ss) > 0)
+		lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
+	return (ft_lstsrev(&lines));
 }

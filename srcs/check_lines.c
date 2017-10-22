@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   check_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 01:39:00 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 04:29:54 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "lemin.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+t_bool	check_lines(t_lst *lines)
 {
-	const char	*beg;
-
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
-		ss++;
-	return (ss - beg);
+	if (false == check_ants(lines)
+		|| false == check_start_end(lines))
+	{
+		ft_lstnfree(&lines, 1);
+		ft_putstr("Error\n");
+		return (false);
+	}
+	return (true);
 }

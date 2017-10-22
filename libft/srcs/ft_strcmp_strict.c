@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp_strict.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 04:49:30 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 04:49:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+int		ft_strcmp_strict(char *s1, char *s2)
 {
-	const char	*beg;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
-		ss++;
-	return (ss - beg);
+	c1 = *s1;
+	c2 = *s2;
+	while (c1 == c2 && c1)
+	{
+		c1 = (unsigned char)*++s1;
+		c2 = (unsigned char)*++s2;
+	}
+	return (c1 - c2);
 }

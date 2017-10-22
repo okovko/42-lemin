@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-t_lst		*ft_lstfind(t_lst *ll, void *qry,
-						int (*cmp)(void *, void *, int))
+t_lst		*ft_lstfind(t_lst *ll, char *qry,
+						int (*cmp)(char *, char *))
 {
 	t_lst	*itr;
 
@@ -22,7 +22,7 @@ t_lst		*ft_lstfind(t_lst *ll, void *qry,
 	itr = ll;
 	while (true)
 	{
-		if (0 == cmp(qry, itr->dat, itr->sz))
+		if (0 == cmp(qry, itr->dat))
 			return (itr);
 		itr = itr->nxt;
 		if (ll == itr)

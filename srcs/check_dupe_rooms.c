@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   check_dupe_rooms.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 13:01:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:29:17 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/22 02:05:08 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/22 02:05:08 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "lemin.h"
 
-int		ft_strcspn(const char *ss, const char *dlm)
+t_bool		check_dupe_rooms(t_lst *rooms)
 {
-	const char	*beg;
+	t_lst	*beg;
 
-	if (NULL == ss || NULL == dlm)
-		return (0);
-	beg = ss;
-	while (*ss && NULL == ft_strchr(dlm, *ss))
-		ss++;
-	return (ss - beg);
+	beg = rooms;
+	while (true)
+	{
+		if (false == is_room(rooms->dat))
+		{
+			rooms = rooms->nxt;
+			continue ;
+		}
+		if (rooms != ft_lstfind(rooms->nxt, rooms->dat, strcmp_1word))
+			return (false);
+		rooms = rooms->nxt;
+		if (beg == rooms)
+			break ;
+	}
+	return (true);
 }
