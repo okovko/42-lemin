@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 02:16:12 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 02:16:12 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/26 15:16:04 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 t_bool	is_link(char *ss)
 {
-	if (NULL == ss || !ISDIGIT(*ss))
+	if (NULL == ss || ISSPACE(*ss))
 		return (false);
-	while (ISDIGIT(*ss))
+	while ('\0' != *ss && !ISSPACE(*ss) && '-' != *ss)
 		ss++;
 	if ('-' != *ss)
 		return (false);
 	ss++;
-	while (ISDIGIT(*ss))
+	while ('\0' != *ss && !ISSPACE(*ss))
 		ss++;
 	if ('\0' != *ss)
 		return (false);
