@@ -15,7 +15,9 @@
 
 t_bool	is_link(char *ss)
 {
-	if (NULL == ss || ISSPACE(*ss))
+	if ('#' == *ss)
+		return (false);
+	if (ISSPACE(*ss))
 		return (false);
 	while ('\0' != *ss && !ISSPACE(*ss) && '-' != *ss)
 		ss++;
