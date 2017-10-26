@@ -108,8 +108,8 @@ int		main(void)
 	ft_lstadd(&test_lines, ft_lstnode("end 3 5", 0));
 	ft_lstadd(&test_lines, ft_lstnode("start-end", 0));
 	ft_lstsrev(&test_lines);
-	lines = test_lines;
-	//lines = parse_lines();
+	//lines = test_lines;
+	lines = parse_lines();
 	if (false == check_lines(lines))
 		exit(EXIT_FAILURE);
 	in = process_input(lines);
