@@ -59,5 +59,6 @@ t_farm		*process_farm(t_input *in);
 t_input		*process_input(t_lst *lines);
 int			strcmp_strict(char *s1, char *s2);
 int			strcmp_1word(char *s1, char *s2);
+int			linkcmp(char *link, char *id);
 
 #endif

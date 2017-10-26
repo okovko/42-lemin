@@ -6,21 +6,12 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 06:10:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 06:10:54 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/26 15:14:41 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemin.h"
-
-static int	linkcmp(char *link, char *id)
-{
-	if (0 == ft_strcmp(id, link))
-		return (0);
-	if (0 == ft_strcmp(id, ft_strchr(link, '-') + 1))
-		return (0);
-	return (-1);
-}
 
 int			count_links(t_lst *links, char *id)
 {

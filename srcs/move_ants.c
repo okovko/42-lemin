@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 08:16:10 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 10:47:27 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/26 15:46:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			move_ants(t_farm *farm, t_lst *path)
 {
 	int		ii;
 	int		jj;
+	char	*ss;
 
 	path = path->nxt;
 	ii = 0;
@@ -27,10 +28,15 @@ void			move_ants(t_farm *farm, t_lst *path)
 		jj = 0;
 		while (jj < ft_lstsz(path) - 1)
 		{
+			ss = ft_lstget(path, jj)->dat;
 			ft_putstr("L");
 			ft_putnbr(ii + 1);
 			ft_putstr("-");
-			ft_putstr(ft_lstget(path, jj)->dat);
+			while ('\0' != *ss && !ISSPACE(*ss))
+			{
+				ft_putchar(*ss);
+				ss++;
+			}
 			ft_putstr("\n");
 			jj++;
 		}
