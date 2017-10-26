@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 23:51:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/22 10:01:37 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/26 14:02:52 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 
 #include "libft.h"
 #include "lemin.h"
+
+t_bool	already_in_path(t_lst *path, char *id)
+{
+	t_lst	*beg;
+
+	if (NULL == path)
+		return (false);
+	beg = path;
+	while (true)
+	{
+		if (0 == strcmp_strict(path->dat, id))
+			return (true);
+		path = path->nxt;
+		if (beg == path)
+			break ;
+	}
+	return (false);
+}
 
 t_room	*get_room(t_farm *farm, char *id)
 {
@@ -35,21 +53,23 @@ int		get_path_r(t_farm *farm, t_room *room, t_lst **path, int depth)
 
 	if (depth == 0)
 		return (0);
+	if (true == already_in_path(*path, room->id))
+		return (0);
 	if (farm->end->id == room->id)
 	{
 		ft_lstadd(path, ft_lstnode(room->id, ft_strlen(room->id)));
-		ft_lstsrev(path);
 		return (1);
 	}
 	ii = 0;
 	while (ii < room->sz)
 	{
-		if (1 == get_path_r(farm, get_room(farm,
-											room->links[ii]), path, depth - 1))
-		{
-			ft_lstadd(path, ft_lstnode(room->id, ft_strlen(room->id)));
+		ft_lstadd(path, ft_lstnode(room->id, ft_strlen(room->id)));
+		if (1 == get_path_r(farm,
+							get_room(farm, room->links[ii]),
+							path,
+							depth - 1))
 			return (1);
-		}
+		ft_lstpop(path);
 		ii++;
 	}
 	return (0);
@@ -62,7 +82,7 @@ t_lst	*get_path(t_farm *farm)
 
 	path = NULL;
 	depth = 2;
-	while (depth < 1000000)
+	while (depth <= farm->sz)
 	{
 		if (1 == get_path_r(farm, farm->start, &path, depth))
 			return (path);
@@ -74,12 +94,13 @@ t_lst	*get_path(t_farm *farm)
 
 int		main(void)
 {
-	t_lst	*test_lines;
+	//t_lst	*test_lines;
 	t_lst	*lines;
 	t_input	*in;
 	t_farm	*farm;
 	t_lst	*path;
 	
+	/*
 	test_lines = NULL;
 	ft_lstadd(&test_lines, ft_lstnode("1", 0));
 	ft_lstadd(&test_lines, ft_lstnode("##start", 0));
@@ -93,10 +114,11 @@ int		main(void)
 	ft_lstadd(&test_lines, ft_lstnode("#0-3", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-2", 0));
 	ft_lstadd(&test_lines, ft_lstnode("1-3", 0));
-	ft_lstadd(&test_lines, ft_lstnode("2-3", 0));
+	ft_lstadd(&test_lines, ft_lstnode("#2-3", 0));
 	ft_lstsrev(&test_lines);
 	lines = test_lines;
-	//lines = parse_lines();
+	*/
+	lines = parse_lines();
 	if (false == check_lines(lines))
 		exit(EXIT_FAILURE);
 	in = process_input(lines);
@@ -105,8 +127,13 @@ int		main(void)
 	farm = process_farm(in);
 	path = get_path(farm);
 	if (NULL == path)
+	{
 		ft_putstr("Error\n");
+	}
 	else
+	{
+		ft_lstsrev(&path);
 		move_ants(farm, path);
+	}
 	exit(EXIT_SUCCESS);
 }
