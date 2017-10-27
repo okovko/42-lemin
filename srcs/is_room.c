@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 01:58:27 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/26 15:16:14 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/27 16:52:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 t_bool	is_room(char *ss)
 {
-	if ('#' == *ss)
-		return (false);
-	if ('\0' == *ss)
+	if ('\0' == *ss || '#' == *ss)
 		return (false);
 	if (ISSPACE(*ss))
 		return (false);
-	while ('\0'!= *ss && !ISSPACE(*ss) && '-' != *ss)
+	while ('\0' != *ss && !ISSPACE(*ss) && '-' != *ss)
 		ss++;
 	if ('\0' == *ss)
 		return (true);
