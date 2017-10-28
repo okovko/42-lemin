@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "libft.h"
 #include "lemin.h"
@@ -29,6 +29,8 @@ t_lst	*parse_lines(void)
 		if ('#' != *ss || 0 == strcmp_strict("##start", ss)
 			|| 0 == strcmp_strict("##end", ss))
 			lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
+		else
+			free(ss);
 	}
 	return (ft_lstsrev(&lines));
 }

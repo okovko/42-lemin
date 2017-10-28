@@ -77,6 +77,27 @@ t_lst	*get_path(t_farm *farm)
 	return (NULL);
 }
 
+void	free_everything(t_lst *lines, t_input *in,
+						t_farm *farm, t_lst *path)
+{
+	int		ii;
+	
+	(void)lines;
+	ft_lstnfree(&in->ants, 1);
+	ft_lstnfree(&in->rooms, 1);
+	ft_lstnfree(&in->links, 1);
+	ii = 0;
+	while (ii < farm->sz)
+	{
+		free(farm->rooms[ii]->links);
+		free(farm->rooms[ii]);
+		ii++;
+	}
+	free(farm->rooms);
+	free(farm);
+	ft_lstnfree(&path, 0);
+}
+
 int		main(void)
 {
 	t_lst	*lines;
@@ -95,5 +116,6 @@ int		main(void)
 	if (false == check_path(path))
 		exit(EXIT_FAILURE);
 	move_ants(farm, path);
+	free_everything(lines, in, farm, path);
 	exit(EXIT_SUCCESS);
 }
