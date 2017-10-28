@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 00:03:59 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/26 14:03:53 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/27 17:19:49 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_bool		check_dupe_rooms(t_lst *rooms);
 t_bool		check_input(t_input *input);
 t_bool		check_lines(t_lst *lines);
 t_bool		check_start_end(t_lst *lines);
+t_bool		check_path(t_lst *path);
 int			count_links(t_lst *links, char *id);
 int			count_rooms(t_lst *rooms);
 t_bool		is_ants(char *ss);
@@ -53,6 +54,7 @@ t_bool		is_link(char *ss);
 t_bool		is_pound(char *ss);
 t_bool		is_room(char *ss);
 t_bool		is_valid(char *ss);
+t_room		*get_room(t_farm *farm, char *id);
 void		move_ants(t_farm *farm, t_lst *path);
 t_lst		*parse_lines(void);
 t_farm		*process_farm(t_input *in);

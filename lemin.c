@@ -33,20 +33,6 @@ t_bool	already_in_path(t_lst *path, char *id)
 	return (false);
 }
 
-t_room	*get_room(t_farm *farm, char *id)
-{
-	int		ii;
-
-	ii = 0;
-	while (ii < farm->sz)
-	{
-		if (0 == ft_strcmp(farm->rooms[ii]->id, id))
-			return (farm->rooms[ii]);
-		ii++;
-	}
-	return (NULL);
-}
-
 int		get_path_r(t_farm *farm, t_room *room, t_lst **path, int depth)
 {
 	int		ii;
@@ -85,7 +71,7 @@ t_lst	*get_path(t_farm *farm)
 	while (depth <= farm->sz)
 	{
 		if (1 == get_path_r(farm, farm->start, &path, depth))
-			return (path);
+			return (ft_lstsrev(&path));
 		depth++;
 	}
 	return (NULL);
@@ -106,14 +92,8 @@ int		main(void)
 		exit(EXIT_FAILURE);
 	farm = process_farm(in);
 	path = get_path(farm);
-	if (NULL == path)
-	{
-		ft_putstr("Error\n");
-	}
-	else
-	{
-		ft_lstsrev(&path);
-		move_ants(farm, path);
-	}
+	if (false == check_path(path))
+		exit(EXIT_FAILURE);
+	move_ants(farm, path);
 	exit(EXIT_SUCCESS);
 }
