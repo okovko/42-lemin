@@ -81,7 +81,7 @@ void	free_everything(t_lst *lines, t_input *in,
 						t_farm *farm, t_lst *path)
 {
 	int		ii;
-	
+
 	(void)lines;
 	ft_lstnfree(&in->ants, 1);
 	ft_lstnfree(&in->rooms, 1);
