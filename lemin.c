@@ -55,7 +55,7 @@ int		get_path_r(t_farm *farm, t_room *room, t_lst **path, int depth)
 							path,
 							depth - 1))
 			return (1);
-		ft_lstpop(path);
+		free(ft_lstpop(path));
 		ii++;
 	}
 	return (0);
