@@ -25,7 +25,7 @@ t_lst	*parse_lines(void)
 		ft_putstr("\n");
 		if ('#' != *ss || 0 == strcmp_strict("##start", ss)
 			|| 0 == strcmp_strict("##end", ss))
-		lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
+			lines = ft_lstadd(&lines, ft_lstnode(ss, ft_strlen(ss)));
 	}
 	return (ft_lstsrev(&lines));
 }
