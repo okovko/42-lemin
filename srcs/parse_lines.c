@@ -10,16 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+#include <unistd.h>
+
 #include "libft.h"
 #include "lemin.h"
 
 t_lst	*parse_lines(void)
 {
+	int			fd;
 	char		*ss;
 	t_lst		*lines;
 
+	fd = open("1.map", O_RDONLY);
 	lines = NULL;
-	while (get_next_line(0, &ss) > 0)
+	while (get_next_line(fd, &ss) > 0)
 	{
 		ft_putstr(ss);
 		ft_putstr("\n");

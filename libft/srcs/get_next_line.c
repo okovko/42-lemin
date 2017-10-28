@@ -3,108 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzaneri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/25 13:40:51 by mzaneri           #+#    #+#             */
-/*   Updated: 2017/10/27 17:12:47 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/27 17:29:03 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/27 17:29:03 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
 
 #include "libft.h"
 
-static char	*join_then_free(char *buf, char *store)
+char	*realloc_line(char *old_buf, size_t size)
 {
-	char		*ret;
+	char	*new_buf;
 
-	ret = ft_strjoin(buf, store);
-	ft_strdel(&buf);
-	return (ret);
-}
-
-static char	*truncate_to_newline(char *buf)
-{
-	char		*finish;
-	size_t		i;
-	size_t		j;
-
-	i = 0;
-	j = 0;
-	while (*(buf + i) && (*(buf + i) != '\n'))
-		i++;
-	finish = (char *)malloc(sizeof(char) * (i + 1));
-	if (!finish)
-		return (NULL);
-	while (j < i)
+	if (!old_buf)
 	{
-		*(finish + j) = *(buf + j);
-		j++;
+		new_buf = ft_strnew(size);
+		return (new_buf);
 	}
-	*(finish + j) = '\0';
-	return (finish);
+	new_buf = ft_strnew(ft_strlen(old_buf) + size);
+	ft_strcpy(new_buf, old_buf);
+	ft_strdel(&old_buf);
+	return (new_buf);
 }
 
-char		*norm_nonsense(char **buf)
+int		fill_line(char **line, char *buffer)
 {
-	ft_strdel(buf);
-	return (NULL);
-}
+	char	*tmp;
+	int		len;
 
-static char	*copy_after_newline(char *buf)
-{
-	char		*temp;
-	char		*finish;
-	size_t		i;
-
-	i = 0;
-	if (!(temp = ft_strchr(buf, '\n')))
-		return (norm_nonsense(&buf));
-	temp++;
-	while (*(temp + i))
-		i++;
-	finish = (char*)malloc(sizeof(char) * (i + 1));
-	if (!finish)
+	if ((tmp = ft_strchr(buffer, '\n')))
 	{
-		ft_strdel(&buf);
-		return (NULL);
+		*line = realloc_line(*line, tmp - buffer);
+		ft_strncat(*line, buffer, tmp - buffer);
+		ft_memmove(buffer, tmp + 1, ft_strlen(tmp));
+		return (1);
 	}
-	i = 0;
-	while (*(temp + i))
+	if ((len = ft_strlen(buffer)))
 	{
-		*(finish + i) = *(temp + i);
-		i++;
+		*line = realloc_line(*line, len);
+		ft_strncat(*line, buffer, len);
+		*buffer = '\0';
 	}
-	*(finish + i) = '\0';
-	ft_strdel(&buf);
-	return (finish);
+	return (0);
 }
 
-int			get_next_line(int const fd, char **line)
+int		get_next_line(const int fd, char **line)
 {
-	static char	*fds_arry[1024];
-	char		store[BUFF_SIZE + 1];
-	int			val;
+	static char	*buffers[FD_MAX];
+	int			n;
 
-	if (fd < 0 || !line || read(fd, store, 0) < 0 || BUFF_SIZE < 1)
+	if (fd < 0 || fd >= FD_MAX || !line || BUFF_SIZE < 1
+		|| (!buffers[fd] && !(buffers[fd] = ft_strnew(BUFF_SIZE))))
 		return (-1);
-	if (!fds_arry[fd % 1024])
-		fds_arry[fd % 1024] = ft_strnew(1);
-	val = 0;
-	while (!(ft_strchr(fds_arry[fd % 1024], '\n')))
+	*line = NULL;
+	if (fill_line(line, buffers[fd]))
+		return (1);
+	while ((n = read(fd, buffers[fd], BUFF_SIZE)) > 0)
 	{
-		val = read(fd, store, BUFF_SIZE);
-		if (val < 0)
-			return (-1);
-		store[val] = '\0';
-		fds_arry[fd % 1024] = join_then_free(fds_arry[fd % 1024], store);
-		if ((val == 0) && (*fds_arry[fd % 1024] == '\0'))
-			return (0);
-		if (val == 0)
-			break ;
+		buffers[fd][n] = '\0';
+		if (fill_line(line, buffers[fd]))
+			return (1);
 	}
-	*line = truncate_to_newline(fds_arry[fd % 1024]);
-	fds_arry[fd % 1024] = copy_after_newline(fds_arry[fd % 1024]);
-	return (1);
+	if (*line)
+		return (1);
+	ft_strdel(&buffers[fd]);
+	if (n < 0)
+		return (-1);
+	return (0);
 }
