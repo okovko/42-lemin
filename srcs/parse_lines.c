@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 00:03:16 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/26 15:58:14 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/31 19:06:10 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@
 
 t_lst	*parse_lines(void)
 {
-	int			fd;
 	char		*ss;
 	t_lst		*lines;
 
-	fd = open("20.map", O_RDONLY);
 	lines = NULL;
-	while (get_next_line(fd, &ss) > 0)
+	while (get_next_line(0, &ss) > 0)
 	{
 		ft_putstr(ss);
 		ft_putstr("\n");
