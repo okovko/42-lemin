@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 23:51:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/27 15:49:52 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:30:28 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		get_path_r(t_farm *farm, t_room *room, t_lst **path, int depth)
 	{
 		ft_lstadd(path, ft_lstnode(room->id, ft_strlen(room->id)));
 		if (1 == get_path_r(farm,
-							get_room(farm, room->links[ii]),
+							get_room(farm, room, room->links[ii]),
 							path,
 							depth - 1))
 			return (1);

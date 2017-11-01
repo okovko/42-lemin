@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 00:03:59 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/27 17:19:49 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/30 15:39:27 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ t_bool		is_link(char *ss);
 t_bool		is_pound(char *ss);
 t_bool		is_room(char *ss);
 t_bool		is_valid(char *ss);
-t_room		*get_room(t_farm *farm, char *id);
+t_room		*get_room(t_farm *farm, t_room *room, char *id);
 void		move_ants(t_farm *farm, t_lst *path);
 t_lst		*parse_lines(void);
 t_farm		*process_farm(t_input *in);
 t_input		*process_input(t_lst *lines);
 int			strcmp_strict(char *s1, char *s2);
 int			strcmp_1word(char *s1, char *s2);
-int			linkcmp(char *link, char *id);
+int			linkcmp_left(char *link, char *id);
+int			linkcmp_right(char *link, char *id);
 
 #endif

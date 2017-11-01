@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_links.c                                      :+:      :+:    :+:   */
+/*   linkcmp_right.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/22 06:10:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/30 15:50:42 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/27 22:30:55 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/31 18:36:55 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemin.h"
 
-int			count_links(t_lst *links, char *id)
+int		linkcmp_right(char *link, char *id)
 {
-	int		ii;
-	t_lst	*beg;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	beg = links;
-	ii = 0;
-	while (true)
+	c1 = *link;
+	c2 = *id;
+	while (c1 == c2 && c1 && !ISSPACE(c1))
 	{
-		if (true == is_link(links->dat)
-			&& (0 == linkcmp_left(links->dat, id)
-			|| 0 == linkcmp_right(ft_strchr(links->dat, '-') + 1, id)))
-			ii++;
-		links = links->nxt;
-		if (beg == links)
-			break ;
+		c1 = (unsigned char)*++link;
+		c2 = (unsigned char)*++id;
 	}
-	return (ii);
+	if ('\0' == c1 && ('\0' == c2 || ISSPACE(c2)))
+		return (0);
+	else
+		return (-1);
 }
