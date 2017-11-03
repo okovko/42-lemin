@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 00:03:59 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/30 15:39:27 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/11/03 14:19:28 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_farm		*process_farm(t_input *in);
 t_input		*process_input(t_lst *lines);
 int			strcmp_strict(char *s1, char *s2);
 int			strcmp_1word(char *s1, char *s2);
-int			linkcmp_left(char *link, char *id);
-int			linkcmp_right(char *link, char *id);
+int			linkcmp(char *link, char *id);
 
 #endif

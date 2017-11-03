@@ -23,7 +23,7 @@ t_room	*get_room(t_farm *farm, t_room *room, char *link)
 	while (ii < farm->sz)
 	{
 		id = farm->rooms[ii]->id;
-		if (0 == linkcmp_left(link, id) || 0 == linkcmp_right(link, id))
+		if (0 == linkcmp(link, id))
 			return (farm->rooms[ii]);
 		ii++;
 	}

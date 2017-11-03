@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 06:54:07 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/30 15:39:08 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/31 19:11:49 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char		**add_links(t_input *in, char *id)
 	{
 		left = in->links->dat;
 		right = ft_strchr(in->links->dat, '-') + 1;
-		if (0 == linkcmp_left(left, id))
+		if (0 == linkcmp(left, id))
 			links[ii++] = right;
-		else if (0 == linkcmp_right(right, id))
+		else if (0 == linkcmp(right, id))
 			links[ii++] = left;
 		in->links = in->links->nxt;
 	}

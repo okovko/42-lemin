@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 06:10:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/30 15:50:42 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/31 19:12:13 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int			count_links(t_lst *links, char *id)
 	while (true)
 	{
 		if (true == is_link(links->dat)
-			&& (0 == linkcmp_left(links->dat, id)
-			|| 0 == linkcmp_right(ft_strchr(links->dat, '-') + 1, id)))
+			&& (0 == linkcmp(links->dat, id)
+			|| 0 == linkcmp(ft_strchr(links->dat, '-') + 1, id)))
 			ii++;
 		links = links->nxt;
 		if (beg == links)
